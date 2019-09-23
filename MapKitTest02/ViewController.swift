@@ -11,6 +11,9 @@ import MapKit
 
 class ViewController: UIViewController {
     
+    // 배열 선언
+    var pins = [MKPointAnnotation]()
+    
     @IBOutlet weak var mapView: MKMapView!
     
     override func viewDidLoad() {
@@ -39,11 +42,12 @@ class ViewController: UIViewController {
         
         
         // pin꼽기
-        let annotation = MKPointAnnotation()
-        annotation.coordinate = location
-        annotation.title = "동의과학대학교"
-        annotation.subtitle = "We Are DIT"
-        //mapView.addAnnotation(annotation)
+        let pin1 = MKPointAnnotation()
+        pin1.coordinate = location
+        pin1.title = "동의과학대학교"
+        pin1.subtitle = "We Are DIT"
+        //mapView.addAnnotation(pin1)
+        pins.append(pin1)   //배열 pins에 pin1 넣기
         
         // 시민공원 pin꼽기 35.1681824, 129.0556455
         let pin2 = MKPointAnnotation()
@@ -52,6 +56,7 @@ class ViewController: UIViewController {
         pin2.title = "부산 시민공원"
         pin2.subtitle = "부산의 랜크마크"
         //mapView.addAnnotation(pin2)
+        pins.append(pin2)   //배열 pins에 pin2 넣기
         
         // 광안대교 pin꼽기 35.147919, 129.130123
         let pin3 = MKPointAnnotation()
@@ -60,6 +65,7 @@ class ViewController: UIViewController {
         pin3.title = "광안대교"
         pin3.subtitle = "부산의 랜드마크"
         //mapView.addAnnotation(pin3)
+        pins.append(pin3)   //배열 pins에 pin3 넣기
         
         // 태종대 pin꼽기 35.0517554, 129.0856113
         let pin4 = MKPointAnnotation()
@@ -68,10 +74,11 @@ class ViewController: UIViewController {
         pin4.title = "태종대"
         pin4.subtitle = "해변 전망대가 있는 고지대 공원"
         //mapView.addAnnotation(pin4)
+        pins.append(pin4)   //배열 pins에 pin4 넣기
         
-        // mapView의 모든 pin들을 나타냄
+        // mapView의 모든 pin들을 나타냄(배열)
         // showAnnotations : 반경 지정 없이 모든 pin을 지도에 나타나게 함
-        mapView.showAnnotations([annotation, pin2, pin3, pin4], animated: true)
+        mapView.showAnnotations(pins, animated: true)
     }
     
     // MapType 버튼 설정 (standard, hybrid, satellite)
