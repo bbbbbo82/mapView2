@@ -37,6 +37,7 @@ class ViewController: UIViewController {
         // mapView 에 add
         mapView.setRegion(region, animated: true)
         
+        
         // pin꼽기
         let annotation = MKPointAnnotation()
         annotation.coordinate = location
@@ -54,11 +55,13 @@ class ViewController: UIViewController {
         
         // 광안대교 pin꼽기 35.147919, 129.130123
         let pin3 = MKPointAnnotation()
-        pin2.coordinate.latitude = 35.147919
-        pin2.coordinate.longitude = 129.130123
-        pin2.title = "광안대교"
-        pin2.subtitle = "부산의 랜드마크"
+        pin3.coordinate.latitude = 35.147919
+        pin3.coordinate.longitude = 129.130123
+        pin3.title = "광안대교"
+        pin3.subtitle = "부산의 랜드마크"
         mapView.addAnnotation(pin3)
+        
+        
     }
     
     // MapType 버튼 설정 (standard, hybrid, satellite)
