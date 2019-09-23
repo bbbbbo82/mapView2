@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, MKMapViewDelegate {
     
     // 배열 선언
     var pins = [MKPointAnnotation]()
@@ -19,6 +19,12 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        // MKMapViewDelegate와 UIViewController(self)
+        mapView.delegate = self
+        
+        
+        
         
         // MapType 설정 (standard, hybrid, satellite)
         mapView.mapType = MKMapType.standard
@@ -92,6 +98,41 @@ class ViewController: UIViewController {
     
     @IBAction func satelliteTypeButton(_ sender: Any) {
         mapView.mapType = MKMapType.satellite
+    }
+    
+    
+    
+    // MKMapViewDelegate 메소드
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        
+        //guard !(annotation is MKUserLocation) else {
+        //return nil
+        //}
+        
+        // pin의 재활용
+        let identifier = "RE"
+        
+        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? MKPinAnnotationView
+        
+        if annotationView == nil {
+            annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+            annotationView!.canShowCallout = true
+            annotationView?.pinTintColor = UIColor.blue   // pin 색깔 변경
+            annotationView?.animatesDrop = true
+            
+            // 오른쪽 : 상세정보 버튼
+            let btn = UIButton(type: .detailDisclosure)
+            annotationView?.rightCalloutAccessoryView = btn
+            
+            // 왼쪽 : 이미지 넣기
+            let imgV = UIImageView(image: UIImage(named: "cat.jpg"))
+            imgV.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+            annotationView?.leftCalloutAccessoryView = imgV
+            
+        } else {
+            annotationView!.annotation = annotation
+        }
+        return annotationView
     }
 }
 
